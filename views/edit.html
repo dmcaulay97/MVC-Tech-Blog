@@ -34,7 +34,20 @@
         </div>
     </nav>
 
-    {{body}}
+    <h1 class="m-3">Dashboard</h1>
+    <form class="m-5 border p-3">
+        <h2>Edit Post</h2>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Enter TItle">
+        </div>
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea class="form-control" id="content" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="create">Update</button>
+        <button type="submit" class="btn btn-danger" id="create">Delete</button>
+    </form>
 
 </body>
 
