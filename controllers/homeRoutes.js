@@ -57,4 +57,13 @@ router.get('/addComment/:id', async (req, res) => {
     }
 });
 
+router.get('/signUp', async (req, res) => {
+    try {
+        res.render('signUp')
+    } catch (err) {
+        onsole.log(err);
+        res.status(500).json(err);
+    }
+})
+
 module.exports = router;
