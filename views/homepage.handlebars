@@ -1,0 +1,10 @@
+<h1 class="m-3">Home</h1>
+{{#each blogs as |blog|}}
+<div class="card m-3" style="width: 70rem;">
+    <div class="card-body">
+        <h5 class="card-title border-bottom">{{blog.title}}</h5>
+        <p class="card-text">{{blog.content}}</p>
+        <a href="#" class="card-link">Comments</a>
+    </div>
+</div>
+{{/each}}
