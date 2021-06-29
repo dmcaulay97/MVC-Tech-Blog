@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         //Needs to get all blogs to display.
         const blogData = await Blog.findAll();
         const blogs = blogData.map((blog) => blog.get({ plain: true }));
-        res.render('homepage', { blogs })
+        res.render('homepage', { blogs, logged_in: req.session.logged_in })
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -29,7 +29,7 @@ router.get('/comments/:id', async (req, res) => {
         const blogUser = await User.findByPk(blogs.user_id, { attributes: { exclude: ['password'] } });
         const blogAuth = blogUser.get({ plain: true });
         console.log(blogs);
-        res.render('comments', { blogs, blogAuth })
+        res.render('comments', { blogs, blogAuth, logged_in: req.session.logged_in })
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -50,7 +50,7 @@ router.get('/addComment/:id', async (req, res) => {
         const blogUser = await User.findByPk(blogs.user_id, { attributes: { exclude: ['password'] } });
         const blogAuth = blogUser.get({ plain: true });
         console.log(blogs);
-        res.render('addComment', { blogs, blogAuth })
+        res.render('addComment', { blogs, blogAuth, logged_in: req.session.logged_in })
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -59,11 +59,19 @@ router.get('/addComment/:id', async (req, res) => {
 
 router.get('/signUp', async (req, res) => {
     try {
-        res.render('signUp')
+        res.render('signUp', { logged_in: req.session.logged_in })
     } catch (err) {
-        onsole.log(err);
+        console.log(err);
         res.status(500).json(err);
     }
 })
+
+router.get('/login', async (req, res) => {
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
+    res.render('login', { logged_in: req.session.logged_in });
+});
 
 module.exports = router;
