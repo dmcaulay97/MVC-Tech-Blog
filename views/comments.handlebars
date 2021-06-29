@@ -1,0 +1,18 @@
+<h1 class="m-3">Home</h1>
+<div class="card m-3" style="width: 70rem;">
+    <div class="card-body">
+        <h5 class="card-title border-bottom">{{blogs.title}}---{{blogAuth.username}}---{{format_date
+            blogs.date_created}}</h5>
+        <p class="card-text">{{blogs.content}}</p>
+        <a href="/addComment/{{blogs.id}}" class="card-link">Add A Comment</a>
+    </div>
+</div>
+{{#each blogs.comments as |comment|}}
+<div class="card m-3" style="width: 70rem;">
+    <div class="card-body">
+        <h5 class="card-title border-bottom">Comment</h5>
+        <p class="card-text">{{comment.content}}</p>
+        <p>-Insert User {{format_date comment.date_created}}</p>
+    </div>
+</div>
+{{/each}}

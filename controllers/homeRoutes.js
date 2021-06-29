@@ -13,6 +13,48 @@ router.get('/', async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-})
+});
+
+router.get('/comments/:id', async (req, res) => {
+    try {
+        const blogData = await Blog.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Comment,
+                }
+            ]
+        });
+
+        const blogs = blogData.get({ plain: true });
+        const blogUser = await User.findByPk(blogs.user_id, { attributes: { exclude: ['password'] } });
+        const blogAuth = blogUser.get({ plain: true });
+        console.log(blogs);
+        res.render('comments', { blogs, blogAuth })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+router.get('/addComment/:id', async (req, res) => {
+    try {
+        const blogData = await Blog.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Comment,
+                }
+            ]
+        });
+
+        const blogs = blogData.get({ plain: true });
+        const blogUser = await User.findByPk(blogs.user_id, { attributes: { exclude: ['password'] } });
+        const blogAuth = blogUser.get({ plain: true });
+        console.log(blogs);
+        res.render('addComment', { blogs, blogAuth })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;
