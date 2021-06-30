@@ -66,7 +66,7 @@ router.get('/dashboard', async (req, res) => {
         });
         console.log(req.session);
         const blogs = blogData.map((blog) => blog.get({ plain: true }));
-        res.render('homepage', { blogs, logged_in: req.session.logged_in })
+        res.render('dashboard', { blogs, logged_in: req.session.logged_in })
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
