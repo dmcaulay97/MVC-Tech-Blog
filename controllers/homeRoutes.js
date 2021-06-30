@@ -59,7 +59,6 @@ router.get('/addComment/:id', async (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
     try {
-        console.log(req.session);
         const blogData = await Blog.findAll({
             where: {
                 user_id: req.session.user_id
@@ -72,6 +71,15 @@ router.get('/dashboard', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+router.get("/new", async (req, res) => {
+    try {
+        res.render('new', { logged_in: req.session.logged_in })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
 
 router.get('/signUp', async (req, res) => {
     try {
