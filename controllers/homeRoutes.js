@@ -59,12 +59,12 @@ router.get('/addComment/:id', async (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
     try {
+        console.log(req.session);
         const blogData = await Blog.findAll({
             where: {
-                user_id: req.session.userId
+                user_id: req.session.user_id
             }
         });
-        console.log(req.session);
         const blogs = blogData.map((blog) => blog.get({ plain: true }));
         res.render('dashboard', { blogs, logged_in: req.session.logged_in })
     } catch (err) {
