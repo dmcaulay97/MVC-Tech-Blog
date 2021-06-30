@@ -57,6 +57,22 @@ router.get('/addComment/:id', async (req, res) => {
     }
 });
 
+router.get('/dashboard', async (req, res) => {
+    try {
+        const blogData = await Blog.findAll({
+            where: {
+                user_id: req.session.userId
+            }
+        });
+        console.log(req.session);
+        const blogs = blogData.map((blog) => blog.get({ plain: true }));
+        res.render('homepage', { blogs, logged_in: req.session.logged_in })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 router.get('/signUp', async (req, res) => {
     try {
         res.render('signUp', { logged_in: req.session.logged_in })
