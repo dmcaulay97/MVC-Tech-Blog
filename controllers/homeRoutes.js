@@ -79,6 +79,21 @@ router.get("/new", async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
+});
+
+router.get('/edit/:id', async (req, res) => {
+    try {
+        const blogData = await Blog.findByPk(req.params.id)
+        const blogs = blogData.get({ plain: true });
+        if (blogs.user_id != req.session.user_id) {
+            res.redirect('/dashboard');
+            return;
+        }
+        res.render('edit', { blogs, logged_in: req.session.logged_in });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 })
 
 router.get('/signUp', async (req, res) => {

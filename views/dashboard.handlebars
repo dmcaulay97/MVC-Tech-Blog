@@ -1,7 +1,7 @@
 <h1 class="m-3">Dashboard</h1>
 <ul class="list-group">
     {{#each blogs as |blog|}}
-    <a href="">
+    <a href="/edit/{{blog.id}}">
         <li class="list-group-item w-50 ml-3 my-1 d-flex justify-content-between"><span>{{blog.title}}
             </span>
             <span>{{format_date blog.date_created}}</span>
