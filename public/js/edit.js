@@ -25,7 +25,7 @@ const del = async () => {
     const url = window.location.pathname.split('/');
     const blog_id = Number.parseInt(url[url.length - 1]);
     const response = await fetch(`/api/blogs/delete/${blog_id}`, {
-        mothod: 'DELETE'
+        method: 'DELETE'
     });
     if (response.ok) {
         document.location.replace(`/dashboard`)

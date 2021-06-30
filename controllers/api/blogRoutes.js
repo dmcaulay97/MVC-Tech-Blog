@@ -40,6 +40,7 @@ router.delete('/delete/:id', async (req, res) => {
                 id: req.params.id
             }
         })
+        console.log(!deletedBlog);
         if (!deletedBlog) {
             res.status(404).json({ message: 'No Blog found with this id!' });
             return;
